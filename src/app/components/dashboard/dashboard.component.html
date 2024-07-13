@@ -1,0 +1,18 @@
+<div *ngIf="error" class="alert alert-danger">{{ error }}</div>
+
+<div *ngIf="stats">
+  <h2>Statistiques</h2>
+  <p>Revenu total: {{ stats.revenu | currency }}</p>
+  <p>Dépense totale: {{ stats.depense | currency }}</p>
+  <p>Balance: {{ stats.balance | currency }}</p>
+  <p>Revenu minimum: {{ stats.minRevenu | currency }}</p>
+  <p>Revenu maximum: {{ stats.maxRevenu | currency }}</p>
+  <p>Dépense minimum: {{ stats.minDepense | currency }}</p>
+  <p>Dépense maximum: {{ stats.maxDepense | currency }}</p>
+</div>
+
+<div *ngIf="chartData">
+  <h2>Données du graphique</h2>
+  <p>Nombre de dépenses: {{ chartData.listeDepenses.length }}</p>
+  <p>Nombre de revenus: {{ chartData.listeRevenus.length }}</p>
+</div>

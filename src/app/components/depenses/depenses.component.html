@@ -1,0 +1,80 @@
+<div class="d-flex flex-column align-items-center my-5">
+  <div class="d-flex w-100" style="gap: 20px;">
+    <div class="flex-grow-1">
+      <div class="card">
+        <div class="card-header">Post Dépense</div>
+        <div class="card-body">
+          <form [formGroup]="depenseForm" (ngSubmit)="onSubmit()" class="custom-form">
+            <div class="form-group">
+              <label for="titre">Titre</label>
+              <input type="text" id="titre" formControlName="titre" class="form-control" placeholder="Entrer le titre" />
+              <div *ngIf="depenseForm.controls['titre'].invalid && (depenseForm.controls['titre'].dirty || depenseForm.controls['titre'].touched)" class="text-danger">
+                Champs obligatoire
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label for="montant">Montant</label>
+              <input type="number" id="montant" formControlName="montant" class="form-control" placeholder="Entrer le montant" />
+              <div *ngIf="depenseForm.controls['montant'].invalid && (depenseForm.controls['montant'].dirty || depenseForm.controls['montant'].touched)" class="text-danger">
+                Champs obligatoire
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label for="date">Date</label>
+              <input type="date" id="date" formControlName="date" class="form-control" />
+              <div *ngIf="depenseForm.controls['date'].invalid && (depenseForm.controls['date'].dirty || depenseForm.controls['date'].touched)" class="text-danger">
+                Champs obligatoire
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label for="description">Description</label>
+              <textarea id="description" formControlName="description" class="form-control" rows="2" placeholder="Champs obligatoire"></textarea>
+              <div *ngIf="depenseForm.controls['description'].invalid && (depenseForm.controls['description'].dirty || depenseForm.controls['description'].touched)" class="text-danger">
+                Champs obligatoire
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label for="categorie">Catégorie</label>
+              <select id="categorie" formControlName="categorie" class="form-control">
+                <option *ngFor="let categorie of listOfCategorie" [value]="categorie">{{categorie}}</option>
+              </select>
+              <div *ngIf="depenseForm.controls['categorie'].invalid && (depenseForm.controls['categorie'].dirty || depenseForm.controls['categorie'].touched)" class="text-danger">
+                Champs obligatoire
+              </div>
+            </div>
+
+            <button type="submit" class="btn btn-primary btn-block" [disabled]="depenseForm.invalid">Ajouter Dépense</button>
+          </form>
+        </div>
+      </div>
+    </div>
+
+    <div class="flex-grow-1">
+      <div class="card">
+        <div class="card-header">Historique de Dépenses</div>
+        <div class="card-body">
+          <div *ngFor="let depense of depenses" class="card my-2">
+            <div class="card-body">
+              <div class="d-flex justify-content-between">
+                <div>
+                  <span class="mr-2"><i class="fas fa-message"></i> {{depense.titre}}</span>
+                  <span class="mr-2"><i class="fas fa-dollar-sign"></i> {{depense.montant}}</span>
+                  <span class="mr-2"><i class="fas fa-clock"></i> {{depense.date | date}}</span>
+                  <span class="mr-2"><i class="fas fa-comment"></i> {{depense.categorie}}</span>
+                </div>
+                <div>
+                  <i class="fas fa-edit text-primary mr-2" (click)="editDepense(depense)"></i>
+                  <i class="fas fa-trash text-danger" (click)="deleteDepense(depense.id)"></i>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
