@@ -14,7 +14,7 @@
             <div class="card-pair mb-3">
                 <div class="card">
                     <div class="card-body">
-                        <h5 class="card-title"><i class="fas fa-wallet"></i> Total Revenus</h5>
+                        <h5 class="card-title"><i class="fas fa-wallet"></i> Total Revenus Mensuel</h5>
                         <p class="card-text">{{ budgetMensuel.totalRevenus | currency:'DT ' }}</p>
                     </div>
                 </div>
@@ -59,21 +59,21 @@
             <div class="card-pair mb-3">
                 <div class="card">
                     <div class="card-body">
-                        <h5 class="card-title"><i class="fas fa-piggy-bank"></i> Épargne</h5>
+                        <h5 class="card-title"><i class="fas fa-piggy-bank"  ></i> Épargne</h5>
                         <p class="card-text">{{ budgetMensuel.epargne | currency:'DT ' }}</p>
                     </div>
                 </div>
                 <div class="card">
                     <div class="card-body">
-                        <h5 class="card-title"><i class="fas fa-lock"></i> Total Épargne</h5>
+                        <h5 class="card-title"><i class="fas fa-lock" ></i> Total Épargne</h5>
                         <p class="card-text">{{ budgetMensuel.totalEpargne | currency:'DT ' }}</p>
                     </div>
                 </div>
             </div>
     
-            <div class="card mb-3">
-                <div class="card-body">
-                    <h5 class="card-title"><i class="fas fa-chart-line"></i> Montant à Investir</h5>
+            <div class="card mb-3" style="align-items: center;">
+                <div class="card-body" style=" text-align: center;">
+                    <h5 class="card-title"><i class="fas fa-chart-line" style="color: green;" ></i> Montant à Investir</h5>
                     <p class="card-text">{{ budgetMensuel.montantAInvestir | currency:'DT ' }}</p>
                 </div>
             </div>

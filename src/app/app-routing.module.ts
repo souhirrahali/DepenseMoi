@@ -11,6 +11,7 @@ import { DepensesComponent } from './components/depenses/depenses.component';
 import { RevenusComponent } from './components/revenus/revenus.component';
 import { StatsComponent } from './components/stats/stats.component';
 import { BudgetComponent } from './components/budget/budget.component';
+import { UserComponent } from './components/user/user.component';
 
 
 
@@ -25,6 +26,7 @@ const routes: Routes = [
   { path: 'revenus', component: RevenusComponent, canActivate: [AuthGuard] },
   { path: 'stats', component: StatsComponent, canActivate: [AuthGuard] },
   { path: 'budget', component: BudgetComponent, canActivate: [AuthGuard] },
+  { path: 'user', component: UserComponent, canActivate: [AuthGuard] },
   { path: '', redirectTo: '/dashboard', pathMatch: 'full' },
   { path: '**', redirectTo: '/dashboard' }
 ];

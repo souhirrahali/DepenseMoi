@@ -31,6 +31,7 @@ import { ChartWrapperComponent } from './components/chart-wrapper/chart-wrapper.
 import { BudgetComponent } from './components/budget/budget.component';
 import { FooterComponent } from './components/footer/footer.component';
 import { NotificationComponent } from './components/notification/notification.component';
+import { UserComponent } from './components/user/user.component';
 
 
 
@@ -48,7 +49,8 @@ import { NotificationComponent } from './components/notification/notification.co
     ChartWrapperComponent,
     FooterComponent,
     BudgetComponent,
-    NotificationComponent
+    NotificationComponent,
+    UserComponent
   
   ],
   imports: [
