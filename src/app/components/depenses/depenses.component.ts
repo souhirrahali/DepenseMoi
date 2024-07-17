@@ -20,6 +20,8 @@ export class DepensesComponent implements OnInit {
     "Transport",
     "Habillement",
     "Soins et santé",
+    "Loisir",
+    "Epargne",
     "autres"
   ];
 
@@ -124,7 +126,7 @@ export class DepensesComponent implements OnInit {
       }
     );
   }
-   logout() {
+  logout() {
     this.authService.logout();
     this.router.navigate(['/login']);
   }

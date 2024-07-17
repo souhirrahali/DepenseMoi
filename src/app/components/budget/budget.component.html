@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body>
+    <div class="budget-flex-container">
+        <div class="budget-container" *ngIf="budgetMensuel; else loading">
+            <h2 class="text-center mb-4">Budget Mensuel</h2>
+    
+            <div class="card-pair mb-3">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title"><i class="fas fa-wallet"></i> Total Revenus</h5>
+                        <p class="card-text">{{ budgetMensuel.totalRevenus | currency:'DT ' }}</p>
+                    </div>
+                </div>
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title"><i class="fas fa-shopping-cart"></i> Dépenses Mensuelles</h5>
+                        <p class="card-text">{{ depensesMensuelles | currency:'DT ' }}</p>
+                    </div>
+                </div>
+            </div>
+    
+            <div class="card-pair mb-3">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title"><i class="fas fa-utensils"></i> Besoins</h5>
+                        <p class="card-text">{{ budgetMensuel.besoins | currency:'DT ' }}</p>
+                    </div>
+                </div>
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title"><i class="fas fa-credit-card"></i> Total Dépenses</h5>
+                        <p class="card-text">{{ budgetMensuel.totalDepenses | currency:'DT ' }}</p>
+                    </div>
+                </div>
+            </div>
+    
+            <div class="card-pair mb-3">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title"><i class="fas fa-gamepad"></i> Loisirs</h5>
+                        <p class="card-text">{{ budgetMensuel.loisirs | currency:'DT ' }}</p>
+                    </div>
+                </div>
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title"><i class="fas fa-smile"></i> Total Loisirs</h5>
+                        <p class="card-text">{{ budgetMensuel.totalLoisir | currency:'DT ' }}</p>
+                    </div>
+                </div>
+            </div>
+    
+            <div class="card-pair mb-3">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title"><i class="fas fa-piggy-bank"></i> Épargne</h5>
+                        <p class="card-text">{{ budgetMensuel.epargne | currency:'DT ' }}</p>
+                    </div>
+                </div>
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title"><i class="fas fa-lock"></i> Total Épargne</h5>
+                        <p class="card-text">{{ budgetMensuel.totalEpargne | currency:'DT ' }}</p>
+                    </div>
+                </div>
+            </div>
+    
+            <div class="card mb-3">
+                <div class="card-body">
+                    <h5 class="card-title"><i class="fas fa-chart-line"></i> Montant à Investir</h5>
+                    <p class="card-text">{{ budgetMensuel.montantAInvestir | currency:'DT ' }}</p>
+                </div>
+            </div>
+        </div>
+    
+        <div class="circular-graph-container">
+            <svg width="300" height="300" viewBox="0 0 200 200">
+                <!-- Besoins -->
+                <circle cx="100" cy="100" r="90" fill="none" stroke="#e0e0e0" stroke-width="20"></circle>
+                <circle cx="100" cy="100" r="90" fill="none" [attr.stroke]="getCircleColor('besoins')" stroke-width="20"
+                  [attr.stroke-dasharray]="calculateStrokeDasharray(depensesPercentage)" stroke-dashoffset="0"></circle>
+                <text x="100" y="100" text-anchor="middle" dominant-baseline="middle" font-size="14">
+                    {{ depensesPercentage | number:'1.0-0' }}% Dépensé (Besoins)
+                </text>
+            </svg>
+    
+            <svg width="300" height="300" viewBox="0 0 200 200">
+                <!-- Loisirs -->
+                <circle cx="100" cy="100" r="90" fill="none" stroke="#e0e0e0" stroke-width="20"></circle>
+                <circle cx="100" cy="100" r="90" fill="none" [attr.stroke]="getCircleColor('loisirs')" stroke-width="20"
+                  [attr.stroke-dasharray]="calculateStrokeDasharray(loisirPercentage)" stroke-dashoffset="0"></circle>
+                <text x="100" y="100" text-anchor="middle" dominant-baseline="middle" font-size="14">
+                    {{ loisirPercentage | number:'1.0-0' }}% Dépensé (Loisirs)
+                </text>
+            </svg>
+    
+            <svg width="300" height="300" viewBox="0 0 200 200">
+                <!-- Epargne -->
+                <circle cx="100" cy="100" r="90" fill="none" stroke="#e0e0e0" stroke-width="20"></circle>
+                <circle cx="100" cy="100" r="90" fill="none" [attr.stroke]="getCircleColor('epargne')" stroke-width="20"
+                  [attr.stroke-dasharray]="calculateStrokeDasharray(epargnePercentage)" stroke-dashoffset="0"></circle>
+                <text x="100" y="100" text-anchor="middle" dominant-baseline="middle" font-size="14">
+                    {{ epargnePercentage | number:'1.0-0' }}% Dépensé (Epargne)
+                </text>
+            </svg>
+        </div>
+    </div>
+    
+    <ng-template #loading>
+        <p class="loading">Chargement du budget...</p>
+    </ng-template>
+    
+</body>
+</html>
+

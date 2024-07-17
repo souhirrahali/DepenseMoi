@@ -1,81 +1,165 @@
-<div class="d-flex flex-column align-items-center my-5">
-    <div class="d-flex w-100" style="gap: 20px;">
-      <div class="flex-grow-1">
-        <div class="card">
-          <div class="card-header">Post Revenu</div>
-          <div class="card-body">
-            <form [formGroup]="revenuForm" (ngSubmit)="onSubmit()" class="custom-form">
-              <div class="form-group">
-                <label for="titre">Titre</label>
-                <input type="text" id="titre" formControlName="titre" class="form-control" placeholder="Entrer le titre" />
-                <div *ngIf="revenuForm.controls['titre'].invalid && (revenuForm.controls['titre'].dirty || revenuForm.controls['titre'].touched)" class="text-danger">
-                  Champs obligatoire
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gestion des revenus</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <style>
+        :root {
+            --primary-color: #B39DDB; /* Violet clair */
+            --primary-dark: #9575CD; /* Violet un peu plus foncé pour les hover */
+            --text-color: #4A148C; /* Violet foncé pour le texte */
+            --light-color: #FFFFFF;
+            --border-color: #D1C4E9; /* Violet très clair pour les bordures */
+        }
+        body {
+            color: var(--text-color);
+            background-color:  #f8f9fa; /* Fond légèrement teinté */
+            margin-bottom: 100px;
+        }
+        .custom-form .form-group {
+            margin-bottom: 1rem;
+        }
+        .custom-form label {
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+        }
+        .card {
+            border-color: var(--border-color);
+        }
+        .card-header {
+            background-color:#ffebee;
+            color: var(--text-color);
+            border-bottom: 1px solid var(--border-color);
+        }
+        .btn-custom {
+            background-color: var(--primary-color);
+            border-color: var(--primary-color);
+            color: var(--text-color);
+        }
+        .btn-custom:hover {
+            background-color: var(--primary-dark);
+            border-color: var(--primary-dark);
+            color: var(--light-color);
+        }
+        .expense-card {
+            transition: all 0.3s ease;
+            border-left: 4px solid var(--primary-color);
+        }
+        .expense-card:hover {
+            box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15);
+        }
+        .action-icon {
+            cursor: pointer;
+            transition: all 0.2s ease;
+            color: var(--primary-dark);
+        }
+        .action-icon:hover {
+            transform: scale(1.1);
+        }
+        .text-custom {
+            color:forestgreen!important;
+        }
+    </style>
+</head>
+<body>
+    <div class="container mt-5">
+        <div class="row">
+            <div class="col-md-6">
+                <div class="card shadow-sm">
+                    <div class="card-header">
+                        <h5 class="mb-0">Ajouter un revenu</h5>
+                    </div>
+                    <div class="card-body">
+                        <form [formGroup]="revenuForm" (ngSubmit)="onSubmit()" class="custom-form">
+                            <div class="form-group">
+                                <label for="titre">Titre</label>
+                                <input type="text" id="titre" formControlName="titre" class="form-control" placeholder="Entrez le titre">
+                                <div *ngIf="revenuForm.controls['titre'].invalid && (revenuForm.controls['titre'].dirty || revenuForm.controls['titre'].touched)" class="text-danger small mt-1">
+                                    Ce champ est obligatoire
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="montant">Montant</label>
+                                <div class="input-group">
+                                    <span class="input-group-text"><i class="fa-solid fa-wallet"></i></span>
+                                    <input type="number" id="montant" formControlName="montant" class="form-control" placeholder="0.00">
+                                </div>
+                                <div *ngIf="revenuForm.controls['montant'].invalid && (revenuForm.controls['montant'].dirty || revenuForm.controls['montant'].touched)" class="text-danger small mt-1">
+                                    Ce champ est obligatoire
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="date">Date</label>
+                                <input type="date" id="date" formControlName="date" class="form-control">
+                                <div *ngIf="revenuForm.controls['date'].invalid && (revenuForm.controls['date'].dirty || revenuForm.controls['date'].touched)" class="text-danger small mt-1">
+                                    Ce champ est obligatoire
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="description">Description</label>
+                                <textarea id="description" formControlName="description" class="form-control" rows="3" placeholder="Décrivez votre revenu"></textarea>
+                                <div *ngIf="revenuForm.controls['description'].invalid && (revenuForm.controls['description'].dirty || revenuForm.controls['description'].touched)" class="text-danger small mt-1">
+                                    Ce champ est obligatoire
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="categorie">Catégorie</label>
+                                <select id="categorie" formControlName="categorie" class="form-select">
+                                    <option value="">Sélectionnez une catégorie</option>
+                                    <option *ngFor="let categorie of listOfCategorie" [value]="categorie">{{categorie}}</option>
+                                </select>
+                                <div *ngIf="revenuForm.controls['categorie'].invalid && (revenuForm.controls['categorie'].dirty || revenuForm.controls['categorie'].touched)" class="text-danger small mt-1">
+                                    Ce champ est obligatoire
+                                </div>
+                            </div>
+
+                            <button type="submit" class="btn btn-custom w-100" style="background-color: #ffebee;" [disabled]="revenuForm.invalid">
+                                <i class="fas fa-plus-circle me-2"></i>Ajouter le revenu
+                            </button>
+                        </form>
+                    </div>
                 </div>
-              </div>
-  
-              <div class="form-group">
-                <label for="montant">Montant</label>
-                <input type="number" id="montant" formControlName="montant" class="form-control" placeholder="Entrer le montant" />
-                <div *ngIf="revenuForm.controls['montant'].invalid && (revenuForm.controls['montant'].dirty || revenuForm.controls['montant'].touched)" class="text-danger">
-                  Champs obligatoire
-                </div>
-              </div>
-  
-              <div class="form-group">
-                <label for="date">Date</label>
-                <input type="date" id="date" formControlName="date" class="form-control" />
-                <div *ngIf="revenuForm.controls['date'].invalid && (revenuForm.controls['date'].dirty || revenuForm.controls['date'].touched)" class="text-danger">
-                  Champs obligatoire
-                </div>
-              </div>
-  
-              <div class="form-group">
-                <label for="description">Description</label>
-                <textarea id="description" formControlName="description" class="form-control" rows="2" placeholder="Champs obligatoire"></textarea>
-                <div *ngIf="revenuForm.controls['description'].invalid && (revenuForm.controls['description'].dirty || revenuForm.controls['description'].touched)" class="text-danger">
-                  Champs obligatoire
-                </div>
-              </div>
-  
-              <div class="form-group">
-                <label for="categorie">Catégorie</label>
-                <select id="categorie" formControlName="categorie" class="form-control">
-                  <option *ngFor="let categorie of listOfCategorie" [value]="categorie">{{categorie}}</option>
-                </select>
-                <div *ngIf="revenuForm.controls['categorie'].invalid && (revenuForm.controls['categorie'].dirty || revenuForm.controls['categorie'].touched)" class="text-danger">
-                  Champs obligatoire
-                </div>
-              </div>
-  
-              <button type="submit" class="btn btn-primary btn-block" [disabled]="revenuForm.invalid">Ajouter Dépense</button>
-            </form>
-          </div>
-        </div>
-      </div>
-  
-      <div class="flex-grow-1">
-        <div class="card">
-          <div class="card-header">Historique de Dépenses</div>
-          <div class="card-body">
-            <div *ngFor="let revenu of revenus" class="card my-2">
-              <div class="card-body">
-                <div class="d-flex justify-content-between">
-                  <div>
-                    <span class="mr-2"><i class="fas fa-message"></i> {{revenu.titre}}</span>
-                    <span class="mr-2"><i class="fas fa-dollar-sign"></i> {{revenu.montant}}</span>
-                    <span class="mr-2"><i class="fas fa-clock"></i> {{revenu.date | date}}</span>
-                    <span class="mr-2"><i class="fas fa-comment"></i> {{revenu.categorie}}</span>
-                  </div>
-                  <div>
-                    <i class="fas fa-edit text-primary mr-2" (click)="editRevenu(revenu)"></i>
-                    <i class="fas fa-trash text-danger" (click)="deleteRevenu(revenu.id)"></i>
-                  </div>
-                </div>
-              </div>
             </div>
-          </div>
+
+            <div class="col-md-6">
+                <div class="card shadow-sm">
+                    <div class="card-header">
+                        <h5 class="mb-0">Historique des revenus</h5>
+                    </div>
+                    <div class="card-body">
+                        <div *ngFor="let revenu of revenus" class="card mb-3 expense-card">
+                            <div class="card-body">
+                                <div class="d-flex justify-content-between align-items-center">
+                                    <div>
+                                        <h6 class="mb-1">{{revenu.titre}}</h6>
+                                        <p class="mb-0 text-muted">
+                                            <small>
+                                                <i class="fas fa-calendar-alt me-2"></i>{{revenu.date | date:'dd/MM/yyyy'}}
+                                                <i class="fas fa-tag ms-3 me-2"></i>{{revenu.categorie}}
+                                            </small>
+                                        </p>
+                                    </div>
+                                    <div class="text-end">
+                                        <h5 class="mb-0 text-custom">{{revenu.montant | currency:'DT ':'symbol':'1.2-2'}}</h5>
+                                        <div class="mt-2">
+                                            <i class="fas fa-edit me-3 action-icon" style="color: coral;" (click)="editRevenu(revenu)"></i>
+                                            <i class="fas fa-trash-alt action-icon" style="color:crimson" (click)="deleteRevenu(revenu.id)"></i>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
-      </div>
     </div>
-  </div>
-  
+</body>
+</html>

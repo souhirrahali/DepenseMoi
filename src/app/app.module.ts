@@ -12,14 +12,25 @@ import { StatsComponent } from './components/stats/stats.component';
 import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { LoginComponent } from './components/auth/login/login.component';
 import { RegisterComponent } from './components/auth/register/register.component';
-import { AboutusComponent } from './components/aboutus/aboutus.component';
+
 import { BaseURL } from './shared/baseUrl';
 import { LogoutComponent } from './components/auth/logout/logout.component';
 import { DepensesComponent } from './components/depenses/depenses.component';
 import { HttpErrorInterceptor } from './services/http.interceptor';
 import { RevenusComponent } from './components/revenus/revenus.component';
 import { NgxPaginationModule } from 'ngx-pagination';
+import { ChartModule } from 'primeng/chart';
+import { TableModule } from 'primeng/table';
+import { CurrencyPipe } from '@angular/common';
+import { ToolbarModule} from 'primeng/toolbar';
+import { AvatarModule} from 'primeng/avatar';
+import { MenuModule} from 'primeng/menu';
+import { NgChartsModule } from 'ng2-charts';
+import { ChartWrapperComponent } from './components/chart-wrapper/chart-wrapper.component';
 
+import { BudgetComponent } from './components/budget/budget.component';
+import { FooterComponent } from './components/footer/footer.component';
+import { NotificationComponent } from './components/notification/notification.component';
 
 
 
@@ -31,10 +42,14 @@ import { NgxPaginationModule } from 'ngx-pagination';
     RegisterComponent,
     StatsComponent,
     DashboardComponent,
-    AboutusComponent,
     LogoutComponent,
     DepensesComponent,
-    RevenusComponent
+    RevenusComponent,
+    ChartWrapperComponent,
+    FooterComponent,
+    BudgetComponent,
+    NotificationComponent
+  
   ],
   imports: [
     BrowserModule,
@@ -43,9 +58,16 @@ import { NgxPaginationModule } from 'ngx-pagination';
     RouterModule,
     HttpClientModule,
     ReactiveFormsModule,
-    NgxPaginationModule
+    NgxPaginationModule,
+    TableModule,
+    ChartModule,
+    ToolbarModule,
+    AvatarModule,
+    MenuModule,
+    NgChartsModule
   ],
-  providers: [
+  providers: [CurrencyPipe,
+    
     { provide: 'BaseURL', useValue: BaseURL},
     {
       provide: HTTP_INTERCEPTORS,

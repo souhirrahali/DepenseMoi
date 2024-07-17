@@ -1,1 +1,60 @@
-<p>stats works!</p>
+<div class="stats-container" *ngIf="stats">
+    <h2 class="stats-title"><i class="fas fa-chart-line"></i> Tableau de bord financier</h2>
+
+    <div class="stats-grid">
+        <div class="stats-card total-revenue">
+            <i class="fas fa-money-bill-wave"></i>
+            <h3>Revenu total</h3>
+            <p>{{stats.revenu | currency:'DT '}}</p>
+        </div>
+        <div class="stats-card total-expense">
+            <i class="fas fa-shopping-cart"></i>
+            <h3>Dépense totale</h3>
+            <p>{{stats.depense | currency:'DT '}}</p>
+        </div>
+        <div class="stats-card balance">
+            <i class="fas fa-balance-scale"></i>
+            <h3>Balance</h3>
+            <p>{{stats.balance | currency:'DT '}}</p>
+        </div>
+        <div class="stats-card min-expense">
+            <i class="fas fa-arrow-down"></i>
+            <h3>Dépense min</h3>
+            <p>{{stats.minDepense | currency:'DT '}}</p>
+        </div>
+        <div class="stats-card max-expense">
+            <i class="fas fa-arrow-up"></i>
+            <h3>Dépense max</h3>
+            <p>{{stats.maxDepense | currency:'DT '}}</p>
+        </div>
+        <div class="stats-card min-revenue">
+            <i class="fas fa-arrow-down"></i>
+            <h3>Revenu min</h3>
+            <p>{{stats.minRevenu | currency:'DT '}}</p>
+        </div>
+        <div class="stats-card max-revenue">
+            <i class="fas fa-arrow-up"></i>
+            <h3>Revenu max</h3>
+            <p>{{stats.maxRevenu | currency:'DT '}}</p>
+        </div>
+    </div>
+
+    <div class="latest-entries">
+        <div class="latest-entry">
+            <h3><i class="fas fa-receipt"></i> Dernière dépense</h3>
+            <p *ngIf="stats.latestDepense">{{stats.latestDepense.titre}} - {{stats.latestDepense.montant |
+                currency:'DT '}}</p>
+        </div>
+        <div class="latest-entry">
+            <h3><i class="fas fa-hand-holding-usd"></i> Dernier revenu</h3>
+            <p *ngIf="stats.latestRevenu">{{stats.latestRevenu.titre}} - {{stats.latestRevenu.montant | currency:'DT '}}
+            </p>
+        </div>
+    </div>
+</div>
+
+<div class="chart-container" *ngIf="chartData">
+    <h2 class="chart-title"><i class="fas fa-chart-bar"></i> Graphique des dépenses et revenus</h2>
+    <app-chart-wrapper [type]="'line'" [data]="chartData" [options]="chartOptions">
+    </app-chart-wrapper>
+</div>

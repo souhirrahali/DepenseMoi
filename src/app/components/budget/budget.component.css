@@ -1,0 +1,126 @@
+.budget-flex-container {
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    gap: 30px;
+    padding: 20px;
+    background-color: #f0f2f5;
+    margin-top: 30px;
+    margin-bottom: 20px;
+}
+
+.budget-container {
+    background-color: #ffffff;
+    max-width: 800px;
+    width: 100%;
+    padding: 20px;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.card-pair {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 20px;
+}
+
+.card {
+    flex: 0 0 48%;
+    border: 1px solid #ddd;
+    border-radius: 12px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.2);
+}
+
+.card-body {
+    padding: 20px;
+}
+
+.card-title {
+    margin: 0;
+    font-size: 1.2rem;
+    color: #333;
+    font-weight: bold;
+    display: flex;
+    align-items: center;
+}
+
+.card-title i {
+    margin-right: 10px;
+    color: #007bff;
+}
+
+.card-text {
+    margin: 10px 0 0;
+    font-size: 1.1rem;
+    color: #555;
+}
+
+h2 {
+    text-align: center;
+    color: #333;
+    margin-bottom: 1.5rem;
+    font-size: 1.8rem;
+}
+
+.circular-graph-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+}
+
+.circular-graph-container svg {
+    width: 200px;
+    height: 200px;
+    margin: 10px;
+}
+
+.loading {
+    text-align: center;
+    font-size: 1.3rem;
+    color: #555;
+}
+
+@media (max-width: 768px) {
+    .budget-flex-container {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .budget-container {
+        padding: 15px;
+    }
+
+    .card-pair {
+        flex-direction: column;
+    }
+
+    .card {
+        flex: 0 0 100%;
+        margin-bottom: 15px;
+    }
+
+    .card-title,
+    .card-text {
+        font-size: 1rem;
+    }
+
+    h2 {
+        font-size: 1.5rem;
+    }
+
+    .circular-graph-container {
+        flex-direction: column;
+    }
+
+    .circular-graph-container svg {
+        width: 150px;
+        height: 150px;
+    }
+}

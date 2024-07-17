@@ -1,0 +1,32 @@
+.notification-card {
+    border-radius: 5px;
+    padding: 20px;
+    text-align: center;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    
+    overflow: hidden;
+    margin-top: 10px;
+}
+
+.success {
+    background-color: #d4edda;
+    color: #155724;
+}
+
+.info {
+    background-color: #d1ecf1;
+    color: #0c5460;
+}
+
+.warning {
+    background-color: #81223d;
+    color: #853e04;
+}
+
+.error {
+    background-color: #e9606c;
+    color: #1b1112;
+}
+.fa-solid{
+    color:rgb(232, 232, 95);
+}
