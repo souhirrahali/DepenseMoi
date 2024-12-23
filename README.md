@@ -30,6 +30,8 @@ To get more help on the Angular CLI use `ng help` or go check out the [Angular C
 
 
 
-![image](https://github.com/user-attachments/assets/b636fbdd-875e-49a1-8ec5-5a339786977b)
+
+
+
 
 
